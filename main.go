@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"net"
 	"sort"
+	"strconv"
 	"time"
 )
 
 func checker(host string, ports, results chan int) {
 
 	for port := range ports {
-		address := fmt.Sprintf("%s:%d", host, port) //net.JoinHostPort(host, strconv.Itoa(port))
+		address := net.JoinHostPort(host, strconv.Itoa(port))
 		timeout := time.Second
 
 		conn, _ := net.DialTimeout("tcp", address, timeout)
